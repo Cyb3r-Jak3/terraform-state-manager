@@ -1,0 +1,25 @@
+name = "tfstate-hono"
+main = "src/index.ts"
+compatibility_date = "2023-09-18"
+
+
+r2_buckets = [
+    { binding = "TFSTATE_BUCKET", bucket_name = "tfstate-dev" }
+]
+
+d1_databases = [
+    { binding = "TFSTATE_DB", database_name = "tfstate", database_id = "de43e4b4-7f94-4be5-94d8-09254f67d600" }
+]
+
+[durable_objects]
+bindings = [
+    { name = "TFSTATE_LOCK", class_name = "DurableLock" }
+]
+
+
+[[migrations]]
+tag = "v1"
+new_classes = ["DurableLock"]
+
+[vars]
+INIT_ENABLED = true
